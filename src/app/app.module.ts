@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BioComponent } from './app.bioComponent';
+import { TestComponent } from './app.testComponent';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BioComponent
+    BioComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
