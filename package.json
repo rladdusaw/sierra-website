@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "preinstall": "npm install -g @angular/cli",
     "postinstall": "ng build --target=production",
     "ng": "ng",
     "start": "node server.js",
