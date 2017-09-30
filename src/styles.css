@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.navbar-nav {
+  display: inline-block;
+  float: none;
+}
+.navbar-default {
+  text-align: center;
+}
