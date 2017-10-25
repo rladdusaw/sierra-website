@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BioComponent } from './app.bioComponent';
+import { CVComponent } from './app.cvComponent';
 import { TestComponent } from './app.testComponent';
 
 @NgModule({
   declarations: [
     AppComponent,
     BioComponent,
+    CVComponent,
     TestComponent
   ],
   imports: [
@@ -18,6 +20,10 @@ import { TestComponent } from './app.testComponent';
       {
         path: '',
         component: BioComponent
+      },
+      {
+        path: 'cv',
+        component: CVComponent
       }
     ])
   ],
