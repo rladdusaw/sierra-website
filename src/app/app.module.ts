@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { BioComponent } from './app.bioComponent';
-import { CVComponent } from './app.cvComponent';
-import { TestComponent } from './app.testComponent';
+import { AppComponent } from './components/app.component';
+import { BioComponent } from './components/app.bioComponent';
+import { CVComponent } from './components/app.cvComponent';
+import { TestComponent } from './components/app.testComponent';
 
 @NgModule({
   declarations: [
