@@ -6,12 +6,14 @@ import { AppComponent } from './components/app.component';
 import { BioComponent } from './components/app.bioComponent';
 import { CVComponent } from './components/app.cvComponent';
 import { TestComponent } from './components/app.testComponent';
+import { SocialComponent } from './components/app.socialComponent';
 
 @NgModule({
   declarations: [
     AppComponent,
     BioComponent,
     CVComponent,
+    SocialComponent,
     TestComponent
   ],
   imports: [
