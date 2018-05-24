@@ -1,0 +1,22 @@
+{
+    "name": "sierra-website-server",
+    "version": "0.1.0",
+    "description": "Server for Sierra's website with login",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rladdusaw/sierra-website.git"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-paresr": "^1.0.1",
+        "express": "^4.16.3",
+        "express-jwt": "^5.3.1",
+        "jsonwebtoken": "^8.2.1",
+        "lodash": "^4.17.10",
+        "pg-promise": "^8.4.4",
+        "q": "^1.5.1",
+        "compression": "^1.7.2",
+        "rootpath": "^0.1.2"
+    },
+    "license": "MIT"
+}

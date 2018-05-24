@@ -1,0 +1,4 @@
+{
+    "connectionString": "postgres://postgres:postgres@localhost:5432/sierra_website",
+    "secret": "Super secret"
+}
