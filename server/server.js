@@ -13,7 +13,7 @@ const env = process.env.NODE_ENV || 'dev';
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(expressJwt({
+app.use('/users/*', expressJwt({
   secret: config.secret,
   getToken: function(req) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -23,7 +23,7 @@ app.use(expressJwt({
     }
     return null;
   }
-}))
+}));
 
 // Run the app by serving the static files in the dist directory
 app.use(express.static(__dirname + '/dist'));
@@ -32,13 +32,15 @@ app.use(express.static(__dirname + '/dist'));
 app.listen(port);
 
 app.use('/users', require('./controllers/users.controller'));
+
 // For all GET requests, send back index.html so that PathLocationStrategy can be used
-var index_path = '/src/index.html';
+var index_path = '/client/src/index.html';
 if (env === 'production') {
-  index_path = '/dist/index.html';
+  index_path = '/client/dist/index.html';
 }
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname + index_path));
-// })
+app.get('/*', function(req, res) {
+  var projectRoot = path.join(__dirname, '../');
+  res.sendFile(path.join(projectRoot + index_path));
+})
 
 console.log(`Server listening on ${port}`);
