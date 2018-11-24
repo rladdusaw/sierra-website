@@ -20,16 +20,20 @@ module.exports = service;
 function authenticate(username, password) {
   var deferred = Q.defer();
 
-  db.one('SELECT * FROM users WHERE username = $1', username)
+  db.oneOrNone('SELECT * FROM users WHERE username = $1', username)
     .then(function(user) {
-      deferred.resolve({
-        _id: user.id,
-        username: user.username,
-        firstName: user.first_name,
-        lastName: user.last_name,
-        admin: user.admin,
-        token: jwt.sign({sub: user.id }, config.secret)
-      });
+      if (user !== null) {
+        deferred.resolve({
+          _id: user.id,
+          username: user.username,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          admin: user.admin,
+          token: jwt.sign({sub: user.id }, config.secret)
+        });
+      } else {
+        deferred.reject();
+      }
     })
     .catch(function(err) {
       deferred.reject(err.name + ': ' + err.message);

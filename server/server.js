@@ -3,6 +3,7 @@ const compression = require('compression');
 const path = require('path');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const expressJwt = require('express-jwt');
 const config = require('config.json');
@@ -11,9 +12,10 @@ const env = process.env.NODE_ENV || 'dev';
 
 // Gzip
 app.use(compression());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/users/*', expressJwt({
+app.use('/api/*', expressJwt({
   secret: config.secret,
   getToken: function(req) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -23,21 +25,20 @@ app.use('/users/*', expressJwt({
     }
     return null;
   }
-}));
+}).unless({path: ['/api/users/authenticate']}));
 
 // Run the app by serving the static files in the dist directory
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
+console.log(__dirname + '/../client/dist')
 
 // Start the app by listening on the default Heroku port
 app.listen(port);
 
-app.use('/users', require('./controllers/users.controller'));
+app.use('/api/users', require('./controllers/users.controller'));
 
 // For all GET requests, send back index.html so that PathLocationStrategy can be used
-var index_path = '/client/src/index.html';
-if (env === 'production') {
-  index_path = '/client/dist/index.html';
-}
+var index_path = '/client/dist/index.html';
+
 app.get('/*', function(req, res) {
   var projectRoot = path.join(__dirname, '../');
   res.sendFile(path.join(projectRoot + index_path));

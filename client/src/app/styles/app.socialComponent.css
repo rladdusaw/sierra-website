@@ -3,3 +3,7 @@
     width: 35px;
     margin: 2px;
 }
+
+div {
+    margin-right: 0;
+}

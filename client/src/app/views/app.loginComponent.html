@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="well col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.get('username').value, loginForm.get('password').value)" name="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input formControlName="username" type="text" class="form-control" id="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-default">Login</button>
+    </form>
+    <p>{{loginForm.get('username').value}}: {{loginForm.get('password').value}}</p>
+  </div>
+</div>
