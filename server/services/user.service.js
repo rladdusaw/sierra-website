@@ -21,8 +21,9 @@ function authenticate(username, password) {
   var deferred = Q.defer();
 
   db.oneOrNone('SELECT * FROM users WHERE username = $1', username)
-    .then(function(user) {
-      if (user !== null) {
+    .then(async function(user) {
+      const match = await bcrypt.compare(password, user.password_hash);
+      if (user && match) {
         deferred.resolve({
           _id: user.id,
           username: user.username,
@@ -32,13 +33,12 @@ function authenticate(username, password) {
           token: jwt.sign({sub: user.id }, config.secret)
         });
       } else {
-        deferred.reject();
+        deferred.resolve(null);
       }
     })
     .catch(function(err) {
       deferred.reject(err.name + ': ' + err.message);
     });
-  
   return deferred.promise;
 }
 
