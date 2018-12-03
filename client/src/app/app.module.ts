@@ -10,10 +10,12 @@ import { CVComponent } from './components/app.cvComponent';
 import { TestComponent } from './components/app.testComponent';
 import { SocialComponent } from './components/app.socialComponent';
 import { LoginComponent } from './components/app.loginComponent';
+import { PageNotFoundComponent } from './components/app.pageNotFoundComponent';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor, JwtInterceptorProvider } from './helpers/jwt.interceptor';
 import { AdminGuard } from './guards/admin.guard';
+import { LogoutComponent } from './components/app.logoutComponent';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { AdminGuard } from './guards/admin.guard';
     BioComponent,
     CVComponent,
     LoginComponent,
+    LogoutComponent,
+    PageNotFoundComponent,
     SocialComponent,
     TestComponent
   ],
@@ -43,9 +47,17 @@ import { AdminGuard } from './guards/admin.guard';
         component: LoginComponent
       },
       {
+        path: 'logout',
+        component: LogoutComponent
+      },
+      {
         path: 'admin',
         component: AdminComponent,
         canActivate: [AdminGuard]
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ])
   ],
