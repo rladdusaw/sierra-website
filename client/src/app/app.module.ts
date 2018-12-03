@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 
+import { AdminComponent } from './components/app.adminComponent';
 import { AppComponent } from './components/app.component';
 import { BioComponent } from './components/app.bioComponent';
 import { CVComponent } from './components/app.cvComponent';
@@ -12,9 +13,11 @@ import { LoginComponent } from './components/app.loginComponent';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor, JwtInterceptorProvider } from './helpers/jwt.interceptor';
+import { AdminGuard } from './guards/admin.guard';
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AppComponent,
     BioComponent,
     CVComponent,
@@ -38,6 +41,11 @@ import { JwtInterceptor, JwtInterceptorProvider } from './helpers/jwt.intercepto
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AdminGuard]
       }
     ])
   ],
